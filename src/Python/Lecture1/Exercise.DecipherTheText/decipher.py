@@ -21,6 +21,7 @@ def wordcount():
 def main():
     wordcount()
     print()
+
     message = open('TextToDecipher.txt').read()
     keys = []
     values = []
