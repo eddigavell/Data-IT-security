@@ -1,4 +1,4 @@
-package Lecture1;
+package JAVA.Lecture1;
 
 import java.util.Base64;
 
@@ -9,7 +9,10 @@ public class Lecture1 {
         //logicOperation();
         byte[] values = {68, 4, 72};
         System.out.println("String bytesToHex: " + bytesToHex(values));
-        System.out.println("Hex to byte: " +  hexStringToByteArray(bytesToHex(values)));;
+        String result = bytesToHex("Hej hopp i lingonskogen".getBytes());
+        System.out.println(result);
+        byte[] bytesResult = hexStringToByteArray(result);
+        System.out.println(new String(bytesResult));
     }
 
     void base64(String msg) {
@@ -77,10 +80,19 @@ public class Lecture1 {
 
     byte[] hexStringToByteArray(String s) {
         int len = s.length();
+        // This only works with an even number of characters.
+        // If len is odd, append a 0 at the start of number.
         if (len % 2 != 0) {
-
+            s = "0" + s;
+            len++;
         }
-        return ;
+        byte[] data = new byte[len / 2];
+        for (int i = 0; i < len; i += 2) {
+            data[i / 2] = (byte) ((Character.digit(s.charAt(i), 16) << 4)
+                                    + Character.digit(s.charAt(i+1),16 ));
+        }
+
+        return data;
     }
 
     public static void main(String[] args) {
