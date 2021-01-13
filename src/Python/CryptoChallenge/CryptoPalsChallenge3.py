@@ -12,7 +12,7 @@ def main():
     decodestring = bytearray()
     for i in range(34):
         decodestring += 'X'.encode()
-
+    print(decodestring)
     result = bytearray()
     for i in range(len(dehexencodedstring)):
         result.append(dehexencodedstring[i] ^ decodestring[i])
