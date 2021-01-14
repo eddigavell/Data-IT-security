@@ -48,6 +48,7 @@ public class CryptopalsChallenge4 {
                 for(int j = 0; j < result.length(); j++) {
                     kalle.append((char) (result.charAt(j) ^ x));
                 }
+                kalle.append(x); //lägger på vilken bokstav det kmr ifrån
 
                 String res1 = kalle.toString();
 
@@ -60,7 +61,7 @@ public class CryptopalsChallenge4 {
                 }
             }
         }
-        System.out.println(highScore.get(highestScore));
+        System.out.println(highScore.get(highestScore)); // 5an kmr ifrån denna strängen.... tar man en substring -1 så försvinner den
         System.out.println("Score: " + highestScore);
     }
 
