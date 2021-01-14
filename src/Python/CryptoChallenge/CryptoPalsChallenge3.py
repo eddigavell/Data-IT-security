@@ -7,13 +7,16 @@ def main():
     # You can do this by hand. But don't: write code to do it for you.
     # How? Devise some method for "scoring" a piece of English plaintext. Character frequency is a good metric.
     # Evaluate each output and choose the one with the best score.
+    # Evaluate each output and choose the one with the best score.
     dehexencodedstring = binascii.unhexlify(hexencodedstring)
 
     decodestring = bytearray()
     for i in range(34):
         decodestring += 'X'.encode()
     print(decodestring)
+
     result = bytearray()
+
     for i in range(len(dehexencodedstring)):
         result.append(dehexencodedstring[i] ^ decodestring[i])
     print(result.decode())

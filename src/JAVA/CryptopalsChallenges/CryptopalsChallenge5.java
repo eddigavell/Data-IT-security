@@ -3,7 +3,7 @@ package JAVA.CryptopalsChallenges;
 public class CryptopalsChallenge5 {
 
     CryptopalsChallenge5() {
-        asd();
+        asd2();
     }
 
     void instruction() {
@@ -29,59 +29,56 @@ public class CryptopalsChallenge5 {
          */
     }
 
-    void asd() {
-        String feedString1 = "Burning 'em, if you ain't quick and nimble";
-        String feedString2 = "I go crazy when I hear a cymbal";
+    void asd2() {
+        String feedString1 = "Burning 'em, if you ain't quick and nimble I go crazy when I hear a cymbal";
         String key="ICE";
 
         byte[] feed1 = feedString1.getBytes();
-        byte[] feed2 = feedString2.getBytes();
 
         int i = 0;
-
         StringBuilder resultSB1 = new StringBuilder();
-        for (byte x: feed1) {
+        for(byte x: feed1) {
             resultSB1.append((char) (x ^ key.charAt(i++)));
             if (i == 3) {
                 i = 0;
             }
         }
-        String result1 = resultSB1.toString();
-        System.out.println(resultSB1);
-
-        i = 0;
-        StringBuilder resultSB2 = new StringBuilder();
-        for (byte x: feed2) {
-            resultSB2.append((char) (x ^ key.charAt(i++)));
-            if (i == 3) {
-                i = 0;
-            }
-        }
-        String result2 = resultSB2.toString();
-        System.out.println(resultSB2);
-
-        String myAnswer1 = bytesToHex(result1.getBytes()).toLowerCase();
-        String myAnswer2 = bytesToHex(result2.getBytes()).toLowerCase();
-        System.out.println(myAnswer1);
-        System.out.println(myAnswer2);
 
         String rightAnswer1 = "0b3637272a2b2e63622c2e69692a23693a2a3c6324202d623d63343c2a26226324272765272";
         String rightAnswer2 = "a282b2f20430a652e2c652a3124333a653e2b2027630c692b20283165286326302e27282f";
+        String rightAnswer = "0b3637272a2b2e63622c2e69692a23693a2a3c6324202d623d63343c2a26226324272765272a282b2f20430a652e2c652a3124333a653e2b2027630c692b20283165286326302e27282f";
 
-        System.out.println("Right answer1: " + rightAnswer1);
-        System.out.println("Right answer1: " + rightAnswer2);
+        byte[] a = resultSB1.toString().getBytes();
+        String result = bytesToHex(a).toLowerCase();
+        System.out.println(result + " : " + result.length());
+        String string1 = result.substring(0,75);
+        String string2 = result.substring(75, 148);
 
-        System.out.println("----- Stämmer svaren? -----");
-        if (rightAnswer1.equals(myAnswer1)) {
-            System.out.println("Answer 1: " + "Stämmer :D");
+        if (result.equals(rightAnswer)) {
+            System.out.println("Answer: correct");
         } else {
-            System.out.println("Answer 1: " + "Nope");
+            System.out.println("Answer: incorrect");
+            System.out.println(rightAnswer);
+            System.out.println(result);
+            System.out.println("-----");
         }
 
-        if (rightAnswer2.equals(myAnswer2)) {
-            System.out.println("Answer 2: " + "Stämmer :D");
+        if (string1.equals(rightAnswer1)) {
+            System.out.println("Answer1: correct");
         } else {
-            System.out.println("Answer 2: " + "Nope");
+            System.out.println("Answer1: incorrect");
+            System.out.println(rightAnswer1);
+            System.out.println(string1);
+            System.out.println("-----");
+        }
+
+        if (string2.equals(rightAnswer2)) {
+            System.out.println("Answer2: correct");
+        } else {
+            System.out.println("Answer2: incorrect");
+            System.out.println(rightAnswer2);
+            System.out.println(string2);
+            System.out.println("-----");
         }
     }
 

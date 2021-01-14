@@ -13,6 +13,7 @@ public class CryptopalsChallenge1 {
         String answer = "SSdtIGtpbGxpbmcgeW91ciBicmFpbiBsaWtlIGEgcG9pc29ub3VzIG11c2hyb29t";
 
         byte[] a = hexStringToByteArray(startString);
+
         StringBuilder fromASCIITOCHARStartString = new StringBuilder();
         for(byte x: a) {
             fromASCIITOCHARStartString.append((char) x);

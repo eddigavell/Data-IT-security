@@ -2,6 +2,7 @@ package JAVA.CryptopalsChallenges;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class CryptopalsChallenge4 {
@@ -21,18 +22,57 @@ public class CryptopalsChallenge4 {
         File file = new File("src/Python/CryptoChallenge/Challenge4.txt");
         Scanner sc = new Scanner(file);
 
-        int i = 0;
+        int q = 0;
         String[] asd = new String[327];
         while (sc.hasNextLine()) {
-            asd[i++] = sc.nextLine();
+            asd[q++] = sc.nextLine();
         }
         sc.close();
 
-        for(String s: asd) {
-            System.out.println(s);
-        }
+        HashMap<Integer, String> highScore = new HashMap<>();
+        int highestScore = 0;
 
-        System.out.println("Inte löst..... <.<");
+
+        for(String s: asd) {
+            StringBuilder result = new StringBuilder();
+            byte[] dehexFeedString = hexStringToByteArray(s); // dehexar
+
+            for (byte b : dehexFeedString) { //From ascii to characters
+                result.append((char) b);
+            }
+
+            for(int i = 0; i < 256; i++) {
+                StringBuilder kalle = new StringBuilder();
+                char x = (char) i; //Generates char from ASCII number
+
+                for(int j = 0; j < result.length(); j++) {
+                    kalle.append((char) (result.charAt(j) ^ x));
+                }
+
+                String res1 = kalle.toString();
+
+                int score = checkValueFromString(res1);
+
+                highScore.put(score, res1);
+
+                if (score >= highestScore) {
+                    highestScore = score;
+                }
+            }
+        }
+        System.out.println(highScore.get(highestScore));
+        System.out.println("Score: " + highestScore);
+    }
+
+    int checkValueFromString(String s) {
+        int score = 0;
+        for(int i = 0; i < s.length(); i++) {
+            byte x = (byte) (s.charAt(i));
+            if (x > 97 && x < 122 || x == 32) {
+                score++;
+            }
+        }
+        return score;
     }
 
     byte[] hexStringToByteArray(String s) {
