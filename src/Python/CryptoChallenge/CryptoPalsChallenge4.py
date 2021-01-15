@@ -1,14 +1,7 @@
 import binascii
 
 
-def valueateStrings(s, x):
-    o = s.replace(" ", "").strip()
-
-    if o.isalpha():
-        print(s, ' Key: ',  x.decode())
-
-
-def processStringsAndSendItToCounter(feed_string):
+def processStringsAndPrintAnswer(feed_string):
     encoded_feed_string = feed_string.encode()
     for i in range(33, 90):
         x = str(chr(i)).encode()
@@ -16,7 +9,12 @@ def processStringsAndSendItToCounter(feed_string):
         for j in range(len(encoded_feed_string)):
             result.append(encoded_feed_string[j] ^ x[0])
         decoded_result = result.decode("iso-8859-15")
-        valueateStrings(decoded_result, x)
+
+        o = decoded_result.replace(" ", "").strip()
+
+        if o.isalpha():
+            print(decoded_result)
+            print('Key:', x.decode())
 
 
 def instructions():
@@ -37,7 +35,7 @@ def main():
     for string in feed_strings:
         dehex_feed_string_in_byte = binascii.unhexlify(string)
         decoded_dehex_feedstring = dehex_feed_string_in_byte.decode("iso-8859-15") #unicode error, försök till att lösa
-        processStringsAndSendItToCounter(decoded_dehex_feedstring)
+        processStringsAndPrintAnswer(decoded_dehex_feedstring)
 
 
 if __name__ == '__main__':
