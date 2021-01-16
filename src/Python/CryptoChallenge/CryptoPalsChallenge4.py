@@ -1,6 +1,13 @@
 import binascii
 
 
+def instructions():
+    jujedamig = ''
+    # One of the 60-character strings in this file has been encrypted by single-character XOR.
+    # Find it.
+    # (Your code from #3 should help.)
+
+
 def processStringsAndPrintAnswer(feed_string):
     encoded_feed_string = feed_string.encode()
     for i in range(33, 90):
@@ -15,13 +22,6 @@ def processStringsAndPrintAnswer(feed_string):
         if o.isalpha():
             print(decoded_result)
             print('Key:', x.decode())
-
-
-def instructions():
-    jujedamig = ''
-    # One of the 60-character strings in this file has been encrypted by single-character XOR.
-    # Find it.
-    # (Your code from #3 should help.)
 
 
 def main():
