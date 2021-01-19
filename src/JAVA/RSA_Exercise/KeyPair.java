@@ -1,4 +1,4 @@
-package JAVA.Lecture2;
+package JAVA.RSA_Exercise;
 
 import java.io.Serial;
 import java.math.BigInteger;
@@ -6,21 +6,13 @@ import java.math.BigInteger;
 public class KeyPair implements java.io.Serializable {
     @Serial
     private static final long serialVersionUID = 4L;
-    private BigInteger key;
-    private BigInteger n;
+    private final BigInteger key;
+    private final BigInteger n;
 
 
     public KeyPair(BigInteger key, BigInteger n) {
-        this.setKey(key);
-        this.setN(n);
-    }
-
-    private void setN(BigInteger n) {
-        this.n = n;
-    }
-
-    private void setKey(BigInteger key) {
         this.key = key;
+        this.n = n;
     }
 
     public BigInteger getN() {
