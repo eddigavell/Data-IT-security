@@ -96,7 +96,7 @@ public class Main {
     public void encryptMessageToTextFile(String s, KeyPair key, String fileName) {
         String encrypted_message = encryptMessage(s, key);
         try {
-            FileWriter fw = new FileWriter(pathForMessages+"EncryptedMsg" + fileName + ".txt");
+            FileWriter fw = new FileWriter(pathForMessages+"EncryptedMsg_" + fileName + ".txt");
             fw.write(encrypted_message);
             fw.close();
         } catch (IOException e) {
