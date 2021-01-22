@@ -14,11 +14,11 @@ class RSA:
         self.name = name
 
 
-def bytes2int(byte_data):
+def __bytes2int(byte_data):
     return int.from_bytes(byte_data, 'big', signed=False)
 
 
-def int2bytes(number: int, fill_size: int = 0) -> bytes:
+def __int2bytes(number: int, fill_size: int = 0) -> bytes:
     """
     Convert an unsigned integer to bytes (big-endian)::
     Does not preserve leading zeros if you don't specify a fill size.
@@ -48,12 +48,18 @@ def int2bytes(number: int, fill_size: int = 0) -> bytes:
     return number.to_bytes(bytes_required, 'big')
 
 
-def encrypt(key_name, message):
+def encrypt(key_name, message, mode=''):
     __readKey(key_name)
-    _, e, n = RSA.public_key
-    byte_msg = message.encode(encoding='utf-8')
-    int_message = bytes2int(byte_msg)
-    return base64.b64encode(int2bytes(pow(int_message, e, n))).decode()
+    if mode == 'sign':
+        _, e, n = RSA.private_key
+        byte_msg = message.encode(encoding='utf-8')
+        int_message = __bytes2int(byte_msg)
+        return base64.b64encode(__int2bytes(pow(int_message, e, n))).decode()
+    else:
+        _, e, n = RSA.public_key
+        byte_msg = message.encode(encoding='utf-8')
+        int_message = __bytes2int(byte_msg)
+        return base64.b64encode(__int2bytes(pow(int_message, e, n))).decode()
 
 
 def encrypt_To_File(key_name, message):
@@ -65,18 +71,25 @@ def encrypt_To_File(key_name, message):
             i += 1
 
     with open(f'Messages/{key_name}_enc_' + str(i), 'w') as f:
-        f.write(str(encoded_msg))
+        f.write(encoded_msg)
 
     print("Messages/" + key_name + "_enc_" + str(i) + " created in : Messages")
 
 
-def decrypt(key_name, message):
+def decrypt(key_name, message, mode=''):
     __readKey(key_name)
-    _, d, n = RSA.private_key
-    message1 = base64.b64decode(message)
-    int_message = bytes2int(message1)
-    result = pow(int_message, d, n)
-    bytes_result = int2bytes(result)
+    if mode == 'sign':
+        _, d, n = RSA.public_key
+        message1 = base64.b64decode(message)
+        int_message = __bytes2int(message1)
+        result = pow(int_message, d, n)
+        bytes_result = __int2bytes(result)
+    else:
+        _, d, n = RSA.private_key
+        message1 = base64.b64decode(message)
+        int_message = __bytes2int(message1)
+        result = pow(int_message, d, n)
+        bytes_result = __int2bytes(result)
     return bytes_result.decode('utf-8')
 
 
